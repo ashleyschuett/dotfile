@@ -7,6 +7,10 @@ cp .vimrc ~/
 # move .inputrc file to correct location
 cp .inputrc ~/
 
+# setup bashrc
+cp .bashrc ~/
+source ~/.bashrc
+
 # shorten kubectl command
 alias k=kubectl
 
