@@ -72,6 +72,12 @@ On_ICyan='\e[0;106m'    # Cyan
 On_IWhite='\e[0;107m'   # White
 
 # ---------------------------
+# Add to PATH
+# ---------------------------
+
+PATH=$PATH:$HOME/go/bin
+
+# ---------------------------
 # Command aliases
 # ---------------------------
 alias ls='ls --color'
@@ -97,6 +103,8 @@ alias grep='grep --color'
 # Ignore whitespcae in vimdiff
 alias vimdiffws="vimdiff -c 'set diffopt+=iwhite'"
 
+alias vim='nvim'
+
 # Poor man's tree command
 function lst () 
 {
@@ -119,13 +127,25 @@ HISTSIZE=4096
 SAVEHIST=4096
 
 # ---------------------------
+# Completion 
+# ---------------------------
+
+[[ -r “/usr/local/etc/profile.d/bash_completion.sh” ]] && . “/usr/local/etc/profile.d/bash_completion.sh”
+
+# ---------------------------
 # Prompt
 # ---------------------------
-PS1="\[$IRed\]\u\[$White\]@\[$Green\]\h \[$Yellow\]\w \[$White\]# "
+#PS1="\[$IRed\]\u\[$White\]@\[$Green\]\h \[$Yellow\]\w \[$White\]# "
+
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+PS1="\[$IRed\]\W\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 
 # ---------------------------
 # Environment variables
 # ---------------------------
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
